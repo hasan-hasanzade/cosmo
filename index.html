@@ -295,7 +295,7 @@
                 <div class="sitemap-container">
                     <div class="sitemap-body">
                         <div class="sitemap-leftside">
-                            <a href="#" class="sitemap-link">Программа</a>
+                            <a href="#program" class="sitemap-link">Программа</a>
                             <a href="#" class="sitemap-link">Что тебя ждет в курсе?</a>
                             <a href="#" class="sitemap-link">Что получишь по окончании курса</a>
                             <a href="#" class="sitemap-link">Как проходит обычение?</a>
@@ -313,16 +313,23 @@
             </section>          
         </main>
         <footer class="footer">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat fugiat suscipit officia est exercitationem, quos quod asperiores dolor incidunt facere?
+            <div class="footer-title">Контактная информация</div>
+            <div class="footer-social">
+                <a href="#"><img src="./img/footer/vk.svg" alt=""></a>
+                <a href="#"><img src="./img/footer/tg.svg" alt=""></a>
+            </div>
         </footer>
         <div class="modal" id="modal">
             <div class="modal-content">
                 <span class="close-btn" id="closeModal">&times;</span>
                 <h2>Регистрация</h2>
                 <input type="text" placeholder="Имя" id="name">
+                <div class="error" id="nameError"></div>
                 <input type="email" placeholder="Эл. почта" id="email">
+                <div class="error" id="emailError"></div>
                 <input type="password" placeholder="Пароль" id="password">
-                <button id="registerBtn">готово</button>
+                <div class="error" id="passwordError"></div>
+                <button id="registerBtn">Готово</button>
             </div>
         </div>
     </div>
