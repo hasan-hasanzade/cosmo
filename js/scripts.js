@@ -101,41 +101,60 @@ window.addEventListener("click", (e) => {
   }
 });
 
-registerBtn.addEventListener("click", () => {
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  const nameError = document.getElementById("nameError");
-  const emailError = document.getElementById("emailError");
-  const passwordError = document.getElementById("passwordError");
-
-  nameError.textContent = "";
-  emailError.textContent = "";
-  passwordError.textContent = "";
-
-  let valid = true;
-
-
-  if (name.length < 2) {
-    nameError.textContent = "Имя не должно быть меньше 2 символов.";
-    valid = false;
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    emailError.textContent = "Некорректный формат почты.";
-    valid = false;
-  }
-
-  if (password.length < 6) {
-    passwordError.textContent = "Пароль должен содержать не менее 6 символов.";
-    valid = false;
-  }
-
-  if (valid) {
-    window.location.href = "/pages/success.html";
-  }
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const registerBtn = document.getElementById("registerBtn");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+  
+    nameInput.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/[0-9]/g, "");
+    });
+  
+    registerBtn.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+  
+      nameError.textContent = "";
+      emailError.textContent = "";
+      passwordError.textContent = "";
+  
+      let valid = true;
+  
+      if (!name) {
+        nameError.textContent = "Поле имя обязательно для заполнения.";
+        valid = false;
+      } else if (name.length < 2) {
+        nameError.textContent = "Имя не должно быть меньше 2 символов.";
+        valid = false;
+      }
+  
+      if (!email) {
+        emailError.textContent = "Поле email обязательно для заполнения.";
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.textContent = "Некорректный формат почты.";
+        valid = false;
+      }
+  
+      if (!password) {
+        passwordError.textContent = "Поле пароль обязательно для заполнения.";
+        valid = false;
+      } else if (password.length < 6) {
+        passwordError.textContent = "Пароль должен содержать не менее 6 символов.";
+        valid = false;
+      }
+  
+      if (valid) {
+        window.location.href = "/pages/success.html";
+      }
+    });
+  });
+  
 
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menuToggle");
@@ -155,10 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-
   menuLinks.forEach((link) => {
     link.addEventListener("click", function () {
-
       mobileMenu.classList.remove("active");
       menuToggle.classList.remove("active");
       body.classList.remove("no-scroll");
@@ -170,5 +187,25 @@ document.addEventListener("DOMContentLoaded", function () {
       menuToggle.classList.remove("active");
       body.classList.remove("no-scroll");
     }
-})
+  });
+});
+
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.onscroll = () => {
+  if (
+    document.body.scrollTop > 300 ||
+    document.documentElement.scrollTop > 300
+  ) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+};
+
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
