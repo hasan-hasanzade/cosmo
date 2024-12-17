@@ -101,60 +101,86 @@ window.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const registerBtn = document.getElementById("registerBtn");
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const nameError = document.getElementById("nameError");
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
-  
-    nameInput.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/[0-9]/g, "");
-    });
-  
-    registerBtn.addEventListener("click", () => {
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-  
-      nameError.textContent = "";
-      emailError.textContent = "";
-      passwordError.textContent = "";
-  
-      let valid = true;
-  
-      if (!name) {
-        nameError.textContent = "Поле имя обязательно для заполнения.";
-        valid = false;
-      } else if (name.length < 2) {
-        nameError.textContent = "Имя не должно быть меньше 2 символов.";
-        valid = false;
-      }
-  
-      if (!email) {
-        emailError.textContent = "Поле email обязательно для заполнения.";
-        valid = false;
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailError.textContent = "Некорректный формат почты.";
-        valid = false;
-      }
-  
-      if (!password) {
-        passwordError.textContent = "Поле пароль обязательно для заполнения.";
-        valid = false;
-      } else if (password.length < 6) {
-        passwordError.textContent = "Пароль должен содержать не менее 6 символов.";
-        valid = false;
-      }
-  
-      if (valid) {
-        window.location.href = "/pages/success.html";
-      }
-    });
+document.addEventListener("DOMContentLoaded", () => { 
+  const registerBtn = document.getElementById("registerBtn");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const nameError = document.getElementById("nameError");
+  const emailError = document.getElementById("emailError");
+  const passwordError = document.getElementById("passwordError");
+
+  const modal = document.getElementById("modal");
+  const successModal = document.getElementById("successModal");
+  const closeModal = document.getElementById("closeModal");
+  const closeSuccessModal = document.getElementById("closeSuccessModal");
+
+  nameInput.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[0-9]/g, "");
   });
-  
+
+  registerBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    nameError.textContent = "";
+    emailError.textContent = "";
+    passwordError.textContent = "";
+
+    let valid = true;
+
+    if (!name) {
+      nameError.textContent = "Поле имя обязательно для заполнения.";
+      valid = false;
+    } else if (name.length < 2) {
+      nameError.textContent = "Имя не должно быть меньше 2 символов.";
+      valid = false;
+    }
+
+    if (!email) {
+      emailError.textContent = "Поле email обязательно для заполнения.";
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailError.textContent = "Некорректный формат почты.";
+      valid = false;
+    }
+
+    if (!password) {
+      passwordError.textContent = "Поле пароль обязательно для заполнения.";
+      valid = false;
+    } else if (password.length < 6) {
+      passwordError.textContent = "Пароль должен содержать не менее 6 символов.";
+      valid = false;
+    }
+
+    if (valid) {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+      successModal.style.display = "flex";
+      
+      nameInput.value = "";
+      emailInput.value = "";
+      passwordInput.value = "";
+
+      setTimeout(() => {
+        successModal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }, 3000);
+    }
+  });
+
+  closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+  });
+
+  closeSuccessModal.addEventListener("click", () => {
+      successModal.style.display = "none";
+      document.body.style.overflow = "auto";
+  });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menuToggle");

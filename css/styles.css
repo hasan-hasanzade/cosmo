@@ -1174,6 +1174,10 @@
     justify-content: center;
 }
 
+._success {
+    margin-bottom: 50px;
+}
+
 
 .modal {
     display: none;
@@ -1206,9 +1210,6 @@
     margin: 5px 0 10px;
 }
 
-._success {
-    margin-bottom: 50px;
-}
 
 .modal-content h2 {
     margin-top: 20px;
